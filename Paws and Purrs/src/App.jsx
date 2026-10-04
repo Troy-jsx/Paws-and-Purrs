@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <h1 className='font-black text-blue-500'>Hello</h1>
+      <h1 className='font-h1 text-[56px] text-blue-500'>Hello</h1>
     </div>
   )
 }

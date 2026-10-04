@@ -1,2 +1,20 @@
 @import "tailwindcss";
+@import url('https://googleapis.com');
 
+@theme{
+    --font-h1: "Paytone One", sans-serif;
+
+
+    --color-bg-main: #951F99;
+    --color-magenta-100: #FEDBFF;
+    --color-magenta-200: #D882DB;
+    --color-magenta-300: #B646BA;
+    --color-magenta-400: #76037A;
+    --color-magenta-500: #3B023D;
+    --color-pink-base: #F285B8;
+    --color-pink-100: #FCE7F1;
+    --color-pink-200: #F8C2DC;
+    --color-pink-300: #ED9AC1;
+    --color-pink-400: #A1597B;
+    --color-pink-500: #692947;
+}
