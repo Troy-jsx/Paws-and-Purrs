@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import sidebar from "./components/sidebar";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <h1 className='font-h1 text-[56px] text-blue-500'>Hello</h1>
+    <div className='bg-gradient w-[100vw] h-[100vh]'>
+      <sidebar/>
+      <h1 className='font-display text-[80px] text-magenta-500 select-none'>Hello Lexi</h1>
     </div>
   )
 }
