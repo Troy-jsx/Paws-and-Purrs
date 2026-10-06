@@ -18,7 +18,7 @@ export default function Sidebar() {
   const [activeId, setActiveId] = useState("dashboard");
 
   return (
-    <nav className="flex h-screen w-[343px] flex-col bg-bg-main drop-shadow-[0_0_7.5px_rgba(0,0,0,0.75)] select-none">
+    <nav className="hidden h-screen w-[280px] shrink-0 flex-col bg-bg-main drop-shadow-[0_0_7.5px_rgba(0,0,0,0.75)] select-none lg:flex xl:w-[343px]">
       <div className="flex w-full items-center justify-center bg-magenta-400 py-12">
         <div className="h-[89px] w-[275px]">
           { <img src={logo} alt="Paws & Purrs" className="size-full object-cover" />}

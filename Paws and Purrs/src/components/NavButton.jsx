@@ -16,7 +16,7 @@ export default function NavButton({
       type="button"
       onClick={onClick}
       aria-current={active ? "page" : undefined}
-      className={`group flex h-22 w-[343px] items-center gap-4 ${px} py-4 text-left transition-colors ${stateClasses}`}
+      className={`group flex h-22 w-full items-center gap-4 ${px} py-4 text-left transition-colors ${stateClasses}`}
     >
       <span className="relative size-7 shrink-0 px-6 translate-y-[-2px]">
         {icon && (
