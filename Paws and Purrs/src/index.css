@@ -1,9 +1,10 @@
-@import "tailwindcss";
 @import url('https://googleapis.com');
+@import "tailwindcss";
 
 @theme{
     --font-h1: "Paytone One", sans-serif;
     --font-display: "Paytone One", sans-serif;
+    --font-josefin: "Josefin Sans", sans-serif;
 
 
     --color-bg-main: #951F99;
