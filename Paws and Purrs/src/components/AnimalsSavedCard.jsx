@@ -17,7 +17,7 @@ export default function AnimalsSavedCard() {
       </h2>
 
       <div className="relative flex flex-1 items-center justify-center">
-        <div className="h-[250px] w-full max-w-[320px]">
+        <div className="h-[200px] w-full max-w-[320px]">
           <DonutChart
             labels={["Dogs", "Cats", "Other"]}
             values={[40, 30, 30]}
