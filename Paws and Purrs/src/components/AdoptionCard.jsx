@@ -41,7 +41,11 @@ export default function AdoptionCard({
         {animals.map(({ src, alt }, i) => (
           <li
             key={alt}
-            className={`relative size-40 shrink-0 overflow-hidden rounded-full bg-white ${i < animals.length - 1 ? "-mr-[55px]" : ""}`}
+            className={`relative size-24 shrink-0 overflow-hidden rounded-full bg-white sm:size-32 xl:size-40 ${
+              i < animals.length - 1
+                ? "-mr-[35px] sm:-mr-[45px] xl:-mr-[55px]"
+                : ""
+            }`}
           >
             <img src={src} alt={alt} className="size-full object-cover" />
           </li>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DonationCard from "../components/DonationCard.jsx";
+import { api } from "../api";
 
 const PERIODS = [
   { value: "today", label: "Today" },
@@ -7,21 +8,32 @@ const PERIODS = [
   { value: "month", label: "This Month" },
 ];
 
-async function fetchDonations(period) {
-  return [
-    { id: 1, name: "Thandi Mokoena", email: "thandi.m@gmail.com", phone: "082 456 7890", category: "Food" },
-    { id: 2, name: "James van der Merwe", email: "jamesvdm@outlook.com", phone: "071 234 5678", category: "Medical Care" },
-    { id: 3, name: "Aisha Patel", email: "aisha.patel@gmail.com", phone: "083 987 6543", category: "Shelter Upkeep" },
-  ];
+function fetchDonations(period) {
+  return api(`/donations?period=${period}`);
 }
 
 export default function Donate() {
   const [period, setPeriod] = useState("today");
   const [donations, setDonations] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchDonations(period).then(setDonations);
+    fetchDonations(period)
+      .then((data) => {
+        setDonations(data);
+        setError("");
+      })
+      .catch((err) => setError(err.message));
   }, [period]);
+
+  async function markPaid(id) {
+    try {
+      const updated = await api(`/donations/${id}/paid`, { method: "PATCH" });
+      setDonations((list) => list.map((d) => (d.id === id ? updated : d)));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
 
   return (
     <main className="flex min-w-0 flex-1 flex-col gap-8 overflow-y-auto px-4 py-8 md:gap-12 md:px-8 md:py-10">
@@ -31,12 +43,29 @@ export default function Donate() {
         </h1>
         <PeriodSelect value={period} onChange={setPeriod} />
       </div>
-
+      {error && (
+        <p
+          role="alert"
+          className="rounded-lg bg-danger/20 px-4 py-3 font-josefin text-[18px] font-semibold text-danger"
+        >
+          {error}
+        </p>
+      )}
       {donations.length > 0 ? (
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
           {donations.map((donation) => (
             <li key={donation.id}>
-              <DonationCard {...donation} />
+              <DonationCard
+                name={donation.name}
+                email={donation.email}
+                phone={donation.phone}
+                category={donation.categoryName}
+                amount={donation.amount}
+                reference={donation.reference}
+                status={donation.status}
+                anonymous={donation.anonymous}
+                onMarkPaid={() => markPaid(donation.id)}
+              />
             </li>
           ))}
         </ul>
@@ -59,7 +88,11 @@ function PeriodSelect({ value, onChange }) {
         className="h-16 w-full cursor-pointer appearance-none rounded-lg bg-magenta-500 pl-6 pr-14 font-josefin text-[22px] font-semibold text-magenta-100 drop-shadow-[0_0_7.5px_rgba(0,0,0,0.75)] outline-none transition-colors hover:bg-[#6d0470] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-magenta-500"
       >
         {PERIODS.map((p) => (
-          <option key={p.value} value={p.value} className="bg-magenta-500 text-magenta-100">
+          <option
+            key={p.value}
+            value={p.value}
+            className="bg-magenta-500 text-magenta-100"
+          >
             {p.label}
           </option>
         ))}

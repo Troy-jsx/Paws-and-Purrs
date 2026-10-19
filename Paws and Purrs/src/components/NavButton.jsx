@@ -1,5 +1,6 @@
 export default function NavButton({
   label,
+  shortLabel,
   icon,
   hoverIcon,
   active = false,
@@ -34,8 +35,17 @@ export default function NavButton({
           />
         )}
       </span>
-      <span className={`flex-1 whitespace-nowrap font-josefin ${textSize} font-semibold leading-[1.2] [text-box:trim-both_cap_alphabetic]`}>
-        {label}
+      <span
+        className={`flex-1 whitespace-nowrap font-josefin ${textSize} font-semibold leading-[1.2] [text-box:trim-both_cap_alphabetic]`}
+      >
+        {shortLabel ? (
+          <>
+            <span className="xl:hidden">{shortLabel}</span>
+            <span className="hidden xl:inline">{label}</span>
+          </>
+        ) : (
+          label
+        )}
       </span>
     </button>
   );

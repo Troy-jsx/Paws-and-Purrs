@@ -1,24 +1,51 @@
-@import url('https://googleapis.com');
+@import url("https://googleapis.com");
 @import "tailwindcss";
 
-@theme{
-    --font-h1: "Paytone One", sans-serif;
-    --font-display: "Paytone One", sans-serif;
-    --font-josefin: "Josefin Sans", sans-serif;
+@theme {
+  --font-h1: "Paytone One", sans-serif;
+  --font-display: "Paytone One", sans-serif;
+  --font-josefin: "Josefin Sans", sans-serif;
 
+  --color-bg-main: #951f99;
+  --color-magenta-100: #fedbff;
+  --color-magenta-200: #d882db;
+  --color-magenta-300: #b646ba;
+  --color-magenta-400: #76037a;
+  --color-magenta-500: #3b023d;
+  --color-pink-base: #f285b8;
+  --color-pink-100: #fce7f1;
+  --color-pink-200: #f8c2dc;
+  --color-pink-300: #ed9ac1;
+  --color-pink-400: #a1597b;
+  --color-pink-500: #692947;
 
-    --color-bg-main: #951F99;
-    --color-magenta-100: #FEDBFF;
-    --color-magenta-200: #D882DB;
-    --color-magenta-300: #B646BA;
-    --color-magenta-400: #76037A;
-    --color-magenta-500: #3B023D;
-    --color-pink-base: #F285B8;
-    --color-pink-100: #FCE7F1;
-    --color-pink-200: #F8C2DC;
-    --color-pink-300: #ED9AC1;
-    --color-pink-400: #A1597B;
-    --color-pink-500: #692947;
+  --color-danger: #690000;
+  --color-danger-dark: #530000;
 
-    --background-image-gradient: linear-gradient(321deg, rgba(248, 194, 220, 1) 8%, rgba(255, 255, 255, 1) 100%);
-};
+  --background-image-gradient: linear-gradient(
+    321deg,
+    rgba(248, 194, 220, 1) 8%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3b023d transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #692947;
+    border-radius: 9999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #692947;
+  }
+}

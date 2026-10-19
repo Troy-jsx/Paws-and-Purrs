@@ -1,9 +1,15 @@
-export default function DonationCard({ name, email, phone, category, date }) {
-  const formattedDate = new Date(date).toLocaleDateString("en-ZA", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+export default function DonationCard({
+  name,
+  email,
+  phone,
+  category,
+  amount,
+  reference,
+  status,
+  anonymous,
+  onMarkPaid,
+}) {
+  const isPaid = status === "paid";
 
   return (
     <article className="group relative flex h-full flex-col gap-6 rounded-lg bg-magenta-500 p-6 drop-shadow-[0_0_7.5px_rgba(0,0,0,0.75)] transition-[filter] hover:drop-shadow-none md:p-8">
@@ -17,29 +23,43 @@ export default function DonationCard({ name, email, phone, category, date }) {
       />
 
       <div className="relative flex items-start justify-between gap-4">
-        <h2 className="min-w-0 font-display text-[28px] leading-[1.2] text-magenta-100 md:text-[32px]">
-          {name}
-        </h2>
+        <div className="flex min-w-0 flex-col gap-1">
+          <h2 className="font-display text-[28px] leading-[1.2] text-magenta-100 md:text-[32px]">
+            {name}
+          </h2>
+          {anonymous && (
+            <span className="font-josefin text-[14px] font-semibold text-magenta-100/70">
+              Asked to stay anonymous
+            </span>
+          )}
+        </div>
         <span className="shrink-0 rounded-lg bg-pink-200 px-4 py-2 font-josefin text-[16px] font-semibold text-magenta-500">
           {category}
         </span>
       </div>
 
       <dl className="relative flex flex-col gap-3 font-josefin text-[18px] font-semibold">
-        <Detail label="Email">
-          <a href={`mailto:${email}`} className="break-all text-white hover:text-pink-base">
-            {email}
-          </a>
-        </Detail>
-        <Detail label="Phone">
-          <a href={`tel:${phone.replace(/\s/g, "")}`} className="text-white hover:text-pink-base">
-            {phone}
-          </a>
-        </Detail>
-        <Detail label="Date">
-          <span className="text-white">{formattedDate}</span>
-        </Detail>
+        <Detail label="Amount">R{amount?.toLocaleString()}</Detail>
+        <Detail label="Ref">{reference}</Detail>
+        <Detail label="Email">{email}</Detail>
+        <Detail label="Phone">{phone || "Not given"}</Detail>
       </dl>
+
+      <div className="relative mt-auto">
+        {isPaid ? (
+          <span className="flex h-12 items-center justify-center rounded-lg bg-magenta-100/15 font-josefin text-[18px] font-semibold text-magenta-100">
+            Paid
+          </span>
+        ) : (
+          <button
+            type="button"
+            onClick={onMarkPaid}
+            className="h-12 w-full rounded-lg bg-pink-base font-josefin text-[18px] font-semibold text-magenta-500 transition-colors hover:bg-pink-200"
+          >
+            Mark as Paid
+          </button>
+        )}
+      </div>
     </article>
   );
 }
@@ -47,8 +67,8 @@ export default function DonationCard({ name, email, phone, category, date }) {
 function Detail({ label, children }) {
   return (
     <div className="flex gap-4">
-      <dt className="w-16 shrink-0 text-magenta-100/70">{label}</dt>
-      <dd className="min-w-0">{children}</dd>
+      <dt className="w-20 shrink-0 text-magenta-100/70">{label}</dt>
+      <dd className="min-w-0 break-all text-white">{children}</dd>
     </div>
   );
 }
