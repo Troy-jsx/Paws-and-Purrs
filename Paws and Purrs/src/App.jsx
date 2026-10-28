@@ -27,7 +27,6 @@ function App() {
         }
       >
         <Route path="/home" element={<AdminDash />} />
-        <Route path="/home" element={<AdminDash />} />
         <Route path="/donate" element={<DonorDonate />} />
         <Route path="/adopt" element={<DonorAdopt />} />
       </Route>
